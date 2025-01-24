@@ -1,0 +1,63 @@
+The EVM (Ethereum Virtual Machine) can read and write to several places
+
+Write & Read:
+- Stack
+- Memory
+- Storage
+- Transient Storage
+- Calldata
+- code
+- returndata
+
+Write (not read);
+- Logs
+
+Read (not write):
+- Transaction data (& Blobhash)
+- Chain data
+- Gas Data
+- Program Counter
+- (other)
+
+calldata and memory: all data is going to exist temporarily only, can be accessed one time only.
+memory variable data can be changed, but calldata variable cannot be modified.
+storage is permanent variables that can be modified.
+struct, arrays and mappings need to have the memory keywords.
+
+in a mapping, default value of all the keys is 0.
+
+-- INTRODUCTION: SECTION 1 (src: cyfrin updraft) --
+### EVM
+
+EVM stands for _Ethereum Virtual Machine_. It's a decentralized computational engine that executes smart contracts.
+Any contract that it's written in Solidity, can be deployed to any EVM-compatible blockchain. Examples of such blockchains and Layer 2 solutions include **Ethereum**, **Polygon**, **Arbitrum**, **Optimism**, and **ZKsync**.
+
+> 🚧 **WARNING**:br
+> Although a blockchain like ZKsync may be EVM-compatible, it is essential to verify that all Solidity keywords are supported
+
+### Contract Setup
+
+Before writing any smart contract, always specify the Solidity version you intend to work with. Additionally, include the SPDX license identifier at the top of your file.
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.7.0 <0.9.0;
+```
+
+Next, create a contract object. In Solidity, a `contract` is similar to a class in other programming languages. Everything within the curly brackets `{}` is part of the contract's scope.
+
+### Types and Structures
+
+Solidity supports various primitive types such as `uint256` and `bool`, allows the creation of custom types with `struct`, and supports arrays and mappings.
+
+### Functions and Behavior
+
+Functions in Solidity can modify the state of the blockchain and execute transactions. Functions that do not modify the blockchain’s state are declared with `view` or `pure` keywords.
+
+### Data Locations and Memory
+
+Solidity lets you specify different data locations for strings, structs, and array variables. The terms `calldata` and `memory` denote temporary variables that exist only for the duration of a function call. Conversely, `storage` variables are permanent and remain in the contract indefinitely. Function parameters cannot be `storage` variables, as they exist only for the duration of the function call.
+
+When you compile your smart contract, the Solidity code is converted into EVM-compatible bytecode, which is machine-readable code.
+
+-- END OF SECTION 1 --
